@@ -1,0 +1,6 @@
+F:\code\Own Project\School_management_system_.Net\Code\DAL\bin\Debug\DAL.dll
+F:\code\Own Project\School_management_system_.Net\Code\DAL\bin\Debug\DAL.pdb
+F:\code\Own Project\School_management_system_.Net\Code\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+F:\code\Own Project\School_management_system_.Net\Code\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+F:\code\Own Project\School_management_system_.Net\Code\DAL\obj\Debug\DAL.dll
+F:\code\Own Project\School_management_system_.Net\Code\DAL\obj\Debug\DAL.pdb
