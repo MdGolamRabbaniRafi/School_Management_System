@@ -1,8 +1,10 @@
-﻿using System;
+﻿using BLL.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+
 
 namespace Backend.Controllers
 {
@@ -13,7 +15,8 @@ namespace Backend.Controllers
         [Route("health/check")]
         public IHttpActionResult Index()
         {
-            return Json(new { message = "API is healthy" });
+            string message = HealthCheckServices.getHealthHealthCheck();
+            return Json(new { message });
         }
     }
 }

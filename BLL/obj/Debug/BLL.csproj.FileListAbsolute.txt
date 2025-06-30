@@ -1,0 +1,9 @@
+F:\code\Own Project\School_management_system_.Net\Code\BLL\bin\Debug\BLL.dll
+F:\code\Own Project\School_management_system_.Net\Code\BLL\bin\Debug\BLL.pdb
+F:\code\Own Project\School_management_system_.Net\Code\BLL\bin\Debug\DAL.dll
+F:\code\Own Project\School_management_system_.Net\Code\BLL\bin\Debug\DAL.pdb
+F:\code\Own Project\School_management_system_.Net\Code\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+F:\code\Own Project\School_management_system_.Net\Code\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+F:\code\Own Project\School_management_system_.Net\Code\BLL\obj\Debug\BLL.csproj.Up2Date
+F:\code\Own Project\School_management_system_.Net\Code\BLL\obj\Debug\BLL.dll
+F:\code\Own Project\School_management_system_.Net\Code\BLL\obj\Debug\BLL.pdb
