@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Repos;
+using DAL.Models;
 
 namespace DAL
 {
@@ -13,6 +14,10 @@ namespace DAL
         public static IHealthCheck<string> healthCheakData()
         {
             return new HealthCheckRepo();
+        }
+        public static IUser<User> userData()
+        {
+            return new UserRepo();
         }
     }
 }
