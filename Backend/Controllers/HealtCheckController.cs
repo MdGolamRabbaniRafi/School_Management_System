@@ -1,22 +1,17 @@
-﻿using BLL.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-
+﻿using Microsoft.AspNetCore.Mvc;
+using BLL.Services;
 
 namespace Backend.Controllers
 {
-    public class HealtCheckController : ApiController
+    [ApiController]
+    [Route("health")]
+    public class HealthCheckController : ControllerBase
     {
-        // GET: HealtCheck
-        [HttpGet]
-        [Route("health/check")]
-        public IHttpActionResult Index()
+        [HttpGet("check")]
+        public IActionResult Index()
         {
             string message = HealthCheckServices.getHealthHealthCheck();
-            return Json(new { message });
+            return Ok(new { message });
         }
     }
 }
