@@ -11,36 +11,40 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    internal class UserRepo :Repos, IUser<User>
+    internal class UserRepo : Repos, IUser<User>
     {
 
 
-public User addUser(User user)
-    {
-        try
+        public User addUser(User user)
         {
-            db.Users.Add(user);
-            db.SaveChanges();
-            return user;
-        }
-        catch (DbEntityValidationException ex)
-        {
-            var sb = new StringBuilder();
-
-            foreach (var entityValidationErrors in ex.EntityValidationErrors)
+            try
             {
-                sb.AppendLine($"Entity of type {entityValidationErrors.Entry.Entity.GetType().Name} in state {entityValidationErrors.Entry.State} has validation errors:");
-
-                foreach (var validationError in entityValidationErrors.ValidationErrors)
-                {
-                    sb.AppendLine($"- Property: {validationError.PropertyName}, Error: {validationError.ErrorMessage}");
-                }
+                db.Users.Add(user);
+                db.SaveChanges();
+                return user;
             }
+            catch (DbEntityValidationException ex)
+            {
+                var sb = new StringBuilder();
 
-            // Throw new exception with detailed info
-            throw new DbEntityValidationException(sb.ToString(), ex);
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    sb.AppendLine($"Entity of type {entityValidationErrors.Entry.Entity.GetType().Name} in state {entityValidationErrors.Entry.State} has validation errors:");
+
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                    {
+                        sb.AppendLine($"- Property: {validationError.PropertyName}, Error: {validationError.ErrorMessage}");
+                    }
+                }
+
+                // Throw new exception with detailed info
+                throw new DbEntityValidationException(sb.ToString(), ex);
+            }
         }
-    }
 
-}
+        public User[] findAll() {
+            return db.Users.ToArray();
+        }
+
+    }
 }
