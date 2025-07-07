@@ -1,45 +1,40 @@
-﻿using BLL.DTO;
+﻿using Microsoft.AspNetCore.Mvc;
+using BLL.DTO;
 using BLL.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
 
 namespace Backend.Controllers
 {
-    [RoutePrefix("user")]
-    public class UserController : ApiController
+    [ApiController]
+    [Route("user")]
+    public class UserController : ControllerBase
     {
-        UserService userService = new UserService();
-        [HttpPost]
-        [Route("add")]
-        public IHttpActionResult addUser(UserDTO user)
+        private readonly UserService userService = new();
+
+        [HttpPost("add")]
+        public IActionResult AddUser([FromBody] UserDTO user)
         {
             if (!ModelState.IsValid)
             {
-                // Return 400 Bad Request with validation errors
                 return BadRequest(ModelState);
             }
+
             var response = userService.addUser(user);
 
             if (response != null)
-                return Ok(response); // 200 OK with user object
+                return Ok(response);
 
-            return BadRequest("User could not be created."); // 400 Bad Request
+            return BadRequest("User could not be created.");
         }
 
-        [HttpGet]
-        [Route("findAll")]
-        public IHttpActionResult findAll()
+        [HttpGet("findAll")]
+        public IActionResult FindAll()
         {
-          
             var response = userService.findAll();
 
             if (response != null)
-                return Ok(response); // 200 OK with user object
+                return Ok(response);
 
-            return BadRequest("Not Found"); // 400 Bad Request
+            return NotFound("Users not found.");
         }
     }
 }
