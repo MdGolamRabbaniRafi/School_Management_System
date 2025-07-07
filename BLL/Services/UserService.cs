@@ -1,4 +1,5 @@
-﻿using BLL.DTO;
+﻿using AutoMapper;
+using BLL.DTO;
 using BLL.Mapper;
 using DAL;
 using DAL.Models;
@@ -22,6 +23,14 @@ namespace BLL.Services
             var data = mapper.Map<UserDTO>(response);
             return data;
 
+        }
+
+        public UserDTO[] findAll()
+        {
+            var response = DataAccessFactory.userData().findAll();
+            var mapper = UserMapper.CreateMapper();
+            var data = mapper.Map<UserDTO[]>(response);
+            return data;
         }
     }
 }
