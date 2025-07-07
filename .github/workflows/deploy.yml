@@ -1,0 +1,32 @@
+name: Build and Deploy .NET Framework App
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup MSBuild path
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Restore NuGet packages
+        run: nuget restore SchoolManagementSystem.sln
+
+      - name: Build with MSBuild
+        run: msbuild SchoolManagementSystem.sln /p:Configuration=Release
+
+    #   # Optional: Deploy via FTP
+    #   - name: Upload via FTP
+    #     uses: SamKirkland/FTP-Deploy-Action@v4
+    #     with:
+    #       server: ftp.yourserver.com
+    #       username: ${{ secrets.FTP_USERNAME }}
+    #       password: ${{ secrets.FTP_PASSWORD }}
+    #       local-dir: Backend\bin\Release\
