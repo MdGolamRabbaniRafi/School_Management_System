@@ -19,6 +19,9 @@ namespace BLL.Services
             var mapper = UserMapper.CreateMapper();          
             var user = mapper.Map<User>(userDTO);
 
+            var hashedPassword = PasswordHasher.HashPassword(userDTO.Password);
+            user.Password = hashedPassword;
+
             var response= DataAccessFactory.userData().addUser(user);
             var data = mapper.Map<UserDTO>(response);
             return data;
