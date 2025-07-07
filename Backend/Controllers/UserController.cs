@@ -28,5 +28,18 @@ namespace Backend.Controllers
 
             return BadRequest("User could not be created."); // 400 Bad Request
         }
+
+        [HttpGet]
+        [Route("findAll")]
+        public IHttpActionResult findAll()
+        {
+          
+            var response = userService.findAll();
+
+            if (response != null)
+                return Ok(response); // 200 OK with user object
+
+            return BadRequest("Not Found"); // 400 Bad Request
+        }
     }
 }
