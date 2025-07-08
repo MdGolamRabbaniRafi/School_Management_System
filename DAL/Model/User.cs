@@ -7,7 +7,7 @@ namespace DAL.Models
     public class User
     {
         [Key]
-        [Column(TypeName = "varchar")]
+        [Column(TypeName = "varchar(36)")]
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Column(TypeName = "datetime2")]
@@ -15,25 +15,29 @@ namespace DAL.Models
 
         [Column(TypeName = "varchar")]
         [StringLength(100)]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [Column(TypeName = "varchar")]
         [StringLength(100)]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Column(TypeName = "datetime2")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         [Column(TypeName = "varchar")]
         [StringLength(100)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         [Column(TypeName = "varchar")]
         [StringLength(20)]
-        public string BloodGroup { get; set; }
+        public string? BloodGroup { get; set; }
 
         [Column(TypeName = "varchar")]
         [StringLength(50)]
-        public string UserType { get; set; }
+        public string? UserType { get; set; }
+
+        [Column(TypeName = "varchar")]
+        [StringLength(255)] // increase from 50
+        public string? ProfilePicture { get; set; }
     }
 }
