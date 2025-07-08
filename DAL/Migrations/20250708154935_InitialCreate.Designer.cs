@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20250707141543_init")]
-    partial class init
+    [Migration("20250708154935_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,36 +28,35 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.Models.User", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("BloodGroup")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("varchar");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar");
 
+                    b.Property<string>("ProfilePicture")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar");
+
                     b.Property<string>("UserType")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar");
 

@@ -5,6 +5,109 @@
     "version": "1.0"
   },
   "paths": {
+    "/auth/signUp": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "BloodGroup",
+                  "DateOfBirth",
+                  "Email",
+                  "FirstName",
+                  "Password",
+                  "UserType"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "string"
+                  },
+                  "CreatedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "FirstName": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Email": {
+                    "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "DateOfBirth": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Password": {
+                    "maxLength": 100,
+                    "minLength": 6,
+                    "pattern": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{6,}$",
+                    "type": "string"
+                  },
+                  "BloodGroup": {
+                    "$ref": "#/components/schemas/BloodGroupEnum"
+                  },
+                  "UserType": {
+                    "$ref": "#/components/schemas/UserTypeEnum"
+                  },
+                  "ProfilePicture": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "ProfileImagePath": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "CreatedAt": {
+                  "style": "form"
+                },
+                "FirstName": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "DateOfBirth": {
+                  "style": "form"
+                },
+                "Password": {
+                  "style": "form"
+                },
+                "BloodGroup": {
+                  "style": "form"
+                },
+                "UserType": {
+                  "style": "form"
+                },
+                "ProfilePicture": {
+                  "style": "form"
+                },
+                "ProfileImagePath": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/health/check": {
       "get": {
         "tags": [
@@ -123,6 +226,15 @@
           },
           "userType": {
             "$ref": "#/components/schemas/UserTypeEnum"
+          },
+          "profilePicture": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "profileImagePath": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
