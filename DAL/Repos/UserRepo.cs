@@ -42,9 +42,18 @@ namespace DAL.Repos
             }
         }
 
-        public User[] findAll() {
-            return db.Users.ToArray();
+        public User[] findAll()
+        {
+            try
+            {
+                return db.Users.ToArray();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("DAL: Error while retrieving all users from the database.", ex);
+            }
         }
+
 
     }
 }

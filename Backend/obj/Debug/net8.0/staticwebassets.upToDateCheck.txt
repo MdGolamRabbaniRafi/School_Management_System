@@ -7,4 +7,5 @@ wwwroot\uploads\2c7df618-750d-4416-bf9d-67a5e5de9d56.jpeg
 wwwroot\uploads\326eff46-f156-4801-a672-805c950e5029.png
 wwwroot\uploads\634730cf-7516-41ff-9e5d-a4f88780e72e.jpeg
 wwwroot\uploads\6a6cc991-029e-42f8-be77-7e9869ce9685.png
+wwwroot\uploads\7f8dacb2-fd18-4b61-8eeb-a8f31838eafd.png
 wwwroot\uploads\c78dc2cc-aa20-489d-af29-ab8992a7ebcd.png
