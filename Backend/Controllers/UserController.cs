@@ -43,7 +43,7 @@ namespace Backend.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Controller: Failed in GetAllUsers");
-                return StatusCode(500, "An error occurred while fetching users.");
+                return StatusCode(500, $"Internal Error: {ex.Message} \n\n{ex.StackTrace}");
             }
         }
     }
