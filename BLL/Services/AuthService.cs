@@ -15,7 +15,6 @@ namespace BLL.Services
 
             user.Password = PasswordHasher.HashPassword(userDTO.Password);
 
-            // Handle file upload
             if (httpRequest.Form.Files.Count > 0)
             {
                 var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads");
@@ -37,9 +36,7 @@ namespace BLL.Services
                         user.ProfilePicture = stream.Name.ToString();
 
                     }
-
-                    // Save path in DB
-                    break; // Use only the first file for profile picture
+                    break; 
                 }
             }
 
