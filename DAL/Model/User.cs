@@ -10,7 +10,7 @@ namespace DAL.Models
         [Column(TypeName = "varchar(36)")]
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
-        [Column(TypeName = "datetime2")]
+        [Column(TypeName = "date")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [Column(TypeName = "varchar")]
@@ -21,7 +21,7 @@ namespace DAL.Models
         [StringLength(100)]
         public string? Email { get; set; }
 
-        [Column(TypeName = "datetime2")]
+        [Column(TypeName = "date")]
         public DateTime? DateOfBirth { get; set; }
 
         [Column(TypeName = "varchar")]

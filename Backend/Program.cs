@@ -1,31 +1,30 @@
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
 
+Env.Load(); // load .env early
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Get connection string from env (or fallback to appsettings)
+var connectionString = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION")
+    ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
-// Register DBContext with connection string from appsettings.json
 builder.Services.AddDbContext<DAL.EF.DBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-Env.Load(); // loads .env file
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseStaticFiles();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
