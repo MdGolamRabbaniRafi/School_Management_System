@@ -9,6 +9,12 @@ namespace Backend.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserService userService = new();
+        private readonly ILogger<UserController> _logger;
+
+        public UserController(ILogger<UserController> logger)
+        {
+            _logger = logger;
+        }
 
         [HttpPost("add")]
         public IActionResult AddUser([FromBody] UserDTO user)
@@ -27,14 +33,18 @@ namespace Backend.Controllers
         }
 
         [HttpGet("findAll")]
-        public IActionResult FindAll()
+        public IActionResult GetAllUsers()
         {
-            var response = userService.findAll();
-
-            if (response != null)
-                return Ok(response);
-
-            return NotFound("Users not found.");
+            try
+            {
+                var users = userService.findAll(); // or repo directly
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Controller: Failed in GetAllUsers");
+                return StatusCode(500, "An error occurred while fetching users.");
+            }
         }
     }
 }
