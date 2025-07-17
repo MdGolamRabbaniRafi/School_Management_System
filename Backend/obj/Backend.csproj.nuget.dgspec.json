@@ -68,6 +68,10 @@
               "target": "Package",
               "version": "[9.0.4, )"
             },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.8.41, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
@@ -172,6 +176,10 @@
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
               "version": "[2.3.0, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.8.41, )"
             }
           },
           "imports": [

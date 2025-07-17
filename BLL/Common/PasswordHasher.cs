@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-public static class PasswordHasher
+internal static class PasswordHasher
 {
     public static string HashPassword(string password)
     {
