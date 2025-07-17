@@ -61,6 +61,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Backend.Controllers.EmailController",
+    "Method": "VerifyOTP",
+    "RelativePath": "email/verifyOTP",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "BLL.DTO.OtpVerificationDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Backend.Controllers.HealthCheckController",
     "Method": "Index",
     "RelativePath": "health/check",
@@ -88,7 +104,7 @@
   },
   {
     "ContainingType": "Backend.Controllers.UserController",
-    "Method": "FindAll",
+    "Method": "GetAllUsers",
     "RelativePath": "user/findAll",
     "HttpMethod": "GET",
     "IsController": true,

@@ -8,40 +8,49 @@ namespace BLL.Services
 {
     public class AuthService
     {
-        public async Task<UserDTO?> AddUserAsync(UserDTO userDTO, HttpRequest httpRequest)
+        public async Task<UserDTO> AddUserAsync(UserDTO userDTO, HttpRequest httpRequest)
         {
-            var mapper = UserMapper.CreateMapper();
-            var user = mapper.Map<User>(userDTO);
-
-            user.Password = PasswordHasher.HashPassword(userDTO.Password);
-
-            if (httpRequest.Form.Files.Count > 0)
+            try
             {
-                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads");
+                var emailResponse = EmailService.SendRandomOtpEmail(userDTO.Email);
+                if (!emailResponse)
+                    throw new Exception("Failed to send OTP email.");
 
-                if (!Directory.Exists(uploadPath))
+                var mapper = UserMapper.CreateMapper();
+                var user = mapper.Map<User>(userDTO);
+
+                user.Password = PasswordHasher.HashPassword(userDTO.Password);
+
+                if (httpRequest.Form.Files.Count > 0)
                 {
+                    var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads");
                     Directory.CreateDirectory(uploadPath);
 
-                }
-                foreach (var postedFile in httpRequest.Form.Files)
-                {
-                    var uniqueFileName = Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
-                    var filePath = Path.Combine(uploadPath, uniqueFileName);
-
-                    // Save file to server
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    foreach (var postedFile in httpRequest.Form.Files)
                     {
-                        await postedFile.CopyToAsync(stream);
-                        user.ProfilePicture = stream.Name.ToString();
+                        var uniqueFileName = Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                        var filePath = Path.Combine(uploadPath, uniqueFileName);
 
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await postedFile.CopyToAsync(stream);
+                        }
+
+                        user.ProfilePicture = Path.Combine("Uploads", uniqueFileName);
+                        break;
                     }
-                    break; 
                 }
-            }
 
-            var response = DataAccessFactory.userData().addUser(user);
-            return response != null ? mapper.Map<UserDTO>(response) : null;
+                var savedUser = DataAccessFactory.userData().addUser(user);
+                if (savedUser == null)
+                    throw new Exception("Failed to save user.");
+
+                return mapper.Map<UserDTO>(savedUser);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Internal Server Error: {ex.Message}");
+            }
         }
     }
 }

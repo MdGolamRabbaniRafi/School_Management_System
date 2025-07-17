@@ -17,14 +17,14 @@ namespace Backend.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult AddUser([FromBody] UserDTO user)
+        public async Task<IActionResult> AddUser([FromBody] UserDTO user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var response = userService.addUser(user);
+            var response =  userService.addUser(user);
 
             if (response != null)
                 return Ok(response);
