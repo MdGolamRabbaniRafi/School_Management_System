@@ -364,3 +364,5 @@ F:\code\Own Project\School_management_system_.Net\Code\Backend\Backend\bin\Debug
 F:\code\Own Project\School_management_system_.Net\Code\Backend\Backend\bin\Debug\net8.0\Backend.staticwebassets.runtime.json
 F:\code\Own Project\School_management_system_.Net\Code\Backend\Backend\bin\Debug\net8.0\Npgsql.dll
 F:\code\Own Project\School_management_system_.Net\Code\Backend\Backend\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+F:\code\Own Project\School_management_system_.Net\Code\Backend\Backend\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+F:\code\Own Project\School_management_system_.Net\Code\Backend\Backend\bin\Debug\net8.0\StackExchange.Redis.dll
