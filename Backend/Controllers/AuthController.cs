@@ -10,21 +10,24 @@ namespace Backend.Controllers
     {
         private readonly AuthService authService = new();
 
+
         [HttpPost("signUp")]
         public async Task<IActionResult> SignUp([FromForm] UserDTO userDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var httpRequest = HttpContext.Request;
+            try
+            {
+                var result = await authService.AddUserAsync(userDto);
 
-
-            var result = await authService.AddUserAsync(userDto, httpRequest);
-
-            if (result != null)
                 return Ok(result);
-
-            return BadRequest("User could not be created.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
         }
     }
+
 }

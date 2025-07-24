@@ -62,16 +62,21 @@
   },
   {
     "ContainingType": "Backend.Controllers.EmailController",
-    "Method": "VerifyOTP",
-    "RelativePath": "email/verifyOTP",
+    "Method": "VerifyOtp",
+    "RelativePath": "email/verify-otp",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "BLL.DTO.OtpVerificationDTO",
-        "IsRequired": true
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "otp",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -95,9 +100,54 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "user",
-        "Type": "BLL.DTO.UserDTO",
-        "IsRequired": true
+        "Name": "Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CreatedAt",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DateOfBirth",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BloodGroup",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProfilePicture",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProfileImagePath",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
