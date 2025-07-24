@@ -17,19 +17,19 @@ namespace Backend.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddUser([FromBody] UserDTO user)
+        public Task<IActionResult> AddUser([FromForm] UserDTO user)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return Task.FromResult<IActionResult>(BadRequest(ModelState));
             }
 
             var response =  userService.addUser(user);
 
             if (response != null)
-                return Ok(response);
+                return Task.FromResult<IActionResult>(Ok(response));
 
-            return BadRequest("User could not be created.");
+            return Task.FromResult<IActionResult>(BadRequest("User could not be created."));
         }
 
         [HttpGet("findAll")]

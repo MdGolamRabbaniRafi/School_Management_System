@@ -16,21 +16,17 @@ namespace Backend.Controllers
             _logger = logger;
         }
 
-        [HttpPost("verifyOTP")]
-        public IActionResult VerifyOTP([FromBody] OtpVerificationDTO request)
+        [HttpPost("verify-otp")]
+        public async Task<IActionResult> VerifyOtp(string email, string otp)
         {
-            if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Otp))
-            {
-                return BadRequest("Email and OTP are required.");
-            }
+            var user = await emailService.VerifyOtpAsync(email, otp);
 
-            bool isVerified = emailService.VerifyOtp(request.Email, request.Otp);
+            if (user != null)
+                return Ok(user);
 
-            if (isVerified)
-                return Ok(new { message = "OTP verified successfully." });
-
-            return BadRequest(new { message = "Invalid or expired OTP." });
+            return BadRequest("Invalid or expired OTP.");
         }
+
 
     }
 }

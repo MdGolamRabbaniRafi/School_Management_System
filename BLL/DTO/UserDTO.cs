@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace BLL.DTO
@@ -44,7 +45,28 @@ namespace BLL.DTO
 
     public enum BloodGroupEnum
     {
-        A_Positive, A_Negative, B_Positive, B_Negative,
-        AB_Positive, AB_Negative, O_Positive, O_Negative
+        [EnumMember(Value = "A+")]
+        A_Positive,
+
+        [EnumMember(Value = "A-")]
+        A_Negative,
+
+        [EnumMember(Value = "B+")]
+        B_Positive,
+
+        [EnumMember(Value = "B-")]
+        B_Negative,
+
+        [EnumMember(Value = "AB+")]
+        AB_Positive,
+
+        [EnumMember(Value = "AB-")]
+        AB_Negative,
+
+        [EnumMember(Value = "O+")]
+        O_Positive,
+
+        [EnumMember(Value = "O-")]
+        O_Negative
     }
 }

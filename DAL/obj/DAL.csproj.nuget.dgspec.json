@@ -10,14 +10,14 @@
         "projectUniqueName": "F:\\code\\Own Project\\School_management_system_.Net\\Code\\Backend\\DAL\\DAL.csproj",
         "projectName": "DAL",
         "projectPath": "F:\\code\\Own Project\\School_management_system_.Net\\Code\\Backend\\DAL\\DAL.csproj",
-        "packagesPath": "C:\\Users\\shopn\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\golam\\.nuget\\packages\\",
         "outputPath": "F:\\code\\Own Project\\School_management_system_.Net\\Code\\Backend\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\shopn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\golam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

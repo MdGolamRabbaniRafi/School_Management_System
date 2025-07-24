@@ -1,4 +1,5 @@
 ﻿using BLL.Common;
+using BLL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace BLL.Services
 {
     public class EmailService
     {
+        private readonly UserService userService = new();
+
         public static bool SendRandomOtpEmail(string toEmail)
         {
             var fromEmail = Environment.GetEnvironmentVariable("EMAIL_USER");
@@ -76,24 +79,22 @@ namespace BLL.Services
         }
 
 
-        public bool VerifyOtp(string email, string inputOtp)
+        public async Task<UserDTO?> VerifyOtpAsync(string email, string inputOtp)
         {
             var redis = RedisHelper.GetDatabase();
             var key = $"otp:{email}";
-            var storedOtp = redis.StringGet(key);
+            var storedOtp = await redis.StringGetAsync(key);
 
-            if (!storedOtp.HasValue)
-                return false;
+            if (!storedOtp.HasValue || storedOtp.ToString() != inputOtp)
+                return null;
 
-            bool isValid = storedOtp.ToString() == inputOtp;
+            await redis.KeyDeleteAsync(key);
 
-            if (isValid)
-            {
-                redis.KeyDelete(key);
-            }
-
-            return isValid;
+            var createdUser = await userService.ConfirmUserRegistrationAsync(email);
+            return createdUser;
         }
+
+
 
     }
 }
