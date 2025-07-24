@@ -108,30 +108,27 @@
         }
       }
     },
-    "/email/verifyOTP": {
+    "/email/verify-otp": {
       "post": {
         "tags": [
           "Email"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OtpVerificationDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OtpVerificationDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/OtpVerificationDTO"
-              }
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "otp",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -158,19 +155,91 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/UserDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserDTO"
+                "required": [
+                  "BloodGroup",
+                  "DateOfBirth",
+                  "Email",
+                  "FirstName",
+                  "Password",
+                  "UserType"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "string"
+                  },
+                  "CreatedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "FirstName": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Email": {
+                    "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "DateOfBirth": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Password": {
+                    "maxLength": 100,
+                    "minLength": 6,
+                    "pattern": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{6,}$",
+                    "type": "string"
+                  },
+                  "BloodGroup": {
+                    "$ref": "#/components/schemas/BloodGroupEnum"
+                  },
+                  "UserType": {
+                    "$ref": "#/components/schemas/UserTypeEnum"
+                  },
+                  "ProfilePicture": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "ProfileImagePath": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "CreatedAt": {
+                  "style": "form"
+                },
+                "FirstName": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "DateOfBirth": {
+                  "style": "form"
+                },
+                "Password": {
+                  "style": "form"
+                },
+                "BloodGroup": {
+                  "style": "form"
+                },
+                "UserType": {
+                  "style": "form"
+                },
+                "ProfilePicture": {
+                  "style": "form"
+                },
+                "ProfileImagePath": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -199,105 +268,30 @@
     "schemas": {
       "BloodGroupEnum": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
+          "a_Positive",
+          "a_Negative",
+          "b_Positive",
+          "b_Negative",
+          "aB_Positive",
+          "aB_Negative",
+          "o_Positive",
+          "o_Negative"
         ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "OtpVerificationDTO": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "otp": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "UserDTO": {
-        "required": [
-          "bloodGroup",
-          "dateOfBirth",
-          "email",
-          "firstName",
-          "password",
-          "userType"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "firstName": {
-            "maxLength": 100,
-            "minLength": 0,
-            "type": "string"
-          },
-          "email": {
-            "minLength": 1,
-            "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
-            "type": "string",
-            "format": "email"
-          },
-          "dateOfBirth": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "password": {
-            "maxLength": 100,
-            "minLength": 6,
-            "pattern": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{6,}$",
-            "type": "string"
-          },
-          "bloodGroup": {
-            "$ref": "#/components/schemas/BloodGroupEnum"
-          },
-          "userType": {
-            "$ref": "#/components/schemas/UserTypeEnum"
-          },
-          "profilePicture": {
-            "type": "string",
-            "format": "binary",
-            "nullable": true
-          },
-          "profileImagePath": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
+        "type": "string"
       },
       "UserTypeEnum": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8
+          "administrator",
+          "principal",
+          "teacher",
+          "student",
+          "parent",
+          "accountant",
+          "librarian",
+          "transportStaff",
+          "hrStaff"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       }
     }
   }
