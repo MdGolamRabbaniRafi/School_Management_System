@@ -45,10 +45,15 @@ namespace BLL.Services
 
             if (userDto == null) return null;
 
+            var environment = Environment.GetEnvironmentVariable("ENVIRONMENT")?.ToLower();
+            string rootPath = environment == "production"
+                ? "/mnt/data"
+                : Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
             if (!string.IsNullOrEmpty(userDto.ProfileImagePath))
             {
-                var tempPath = Path.Combine("wwwroot", userDto.ProfileImagePath);
-                var uploadsFolder = Path.Combine("wwwroot", "Uploads");
+                var tempPath = Path.Combine(rootPath, userDto.ProfileImagePath);
+                var uploadsFolder = Path.Combine(rootPath, "Uploads");
 
                 Directory.CreateDirectory(uploadsFolder);
 
@@ -59,17 +64,15 @@ namespace BLL.Services
                 {
                     System.IO.File.Move(tempPath, finalPath, overwrite: true);
                     userDto.ProfileImagePath = Path.Combine("Uploads", fileName).Replace("\\", "/");
-
                 }
             }
 
-            // Save user to DB
             var createdUser = this.addUser(userDto);
 
-            // Remove user from redis after successful save
             await redis.KeyDeleteAsync($"user:pending:{email}");
 
             return createdUser;
         }
+
     }
 }
