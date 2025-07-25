@@ -11,5 +11,6 @@ wwwroot\uploads\5d7f208f-4566-44c7-abca-7cf435e88019.jpg
 wwwroot\uploads\634730cf-7516-41ff-9e5d-a4f88780e72e.jpeg
 wwwroot\uploads\6a6cc991-029e-42f8-be77-7e9869ce9685.png
 wwwroot\uploads\7f8dacb2-fd18-4b61-8eeb-a8f31838eafd.png
+wwwroot\uploads\b56d7808-0ac2-4f04-be5f-2ef363621ca0.jpg
 wwwroot\uploads\c78dc2cc-aa20-489d-af29-ab8992a7ebcd.png
 wwwroot\uploads\f4e6e5ea-3160-4b96-b021-855f8f34d097.jpg
