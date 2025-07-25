@@ -17,7 +17,12 @@ namespace BLL.Services
                 if (!emailSent)
                     throw new Exception("Failed to send OTP email.");
 
-                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "TempUploads");
+                var environment = Environment.GetEnvironmentVariable("ENVIRONMENT")?.ToLower();
+                string rootUploadPath = environment == "production"
+                    ? Path.Combine("/mnt/data")
+                    : Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
+                var uploadPath = Path.Combine(rootUploadPath, "TempUploads");
                 Directory.CreateDirectory(uploadPath);
 
                 string? tempImagePath = null;
