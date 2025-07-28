@@ -46,6 +46,8 @@ namespace BLL.Services
             if (userDto == null) return null;
 
             var environment = Environment.GetEnvironmentVariable("ENVIRONMENT")?.ToLower();
+            var hostUrl = Environment.GetEnvironmentVariable("HOST_URL")?.TrimEnd('/'); 
+
             string rootPath = environment == "production"
                 ? "/mnt/data"
                 : Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
@@ -63,7 +65,15 @@ namespace BLL.Services
                 if (System.IO.File.Exists(tempPath))
                 {
                     System.IO.File.Move(tempPath, finalPath, overwrite: true);
-                    userDto.ProfileImagePath = Path.Combine("Uploads", fileName).Replace("\\", "/");
+
+                    if (environment == "production" && !string.IsNullOrEmpty(hostUrl))
+                    {
+                        userDto.ProfileImagePath = $"{hostUrl}/Uploads/{fileName}";
+                    }
+                    else
+                    {
+                        userDto.ProfileImagePath = Path.Combine("Uploads", fileName).Replace("\\", "/");
+                    }
                 }
             }
 
@@ -73,6 +83,7 @@ namespace BLL.Services
 
             return createdUser;
         }
+
 
     }
 }
